@@ -130,30 +130,6 @@ fun EndSection() {
 }
 
 @Composable
-fun ImageView(id: Any) {
-    SubcomposeAsyncImage(
-        model = id,
-        contentDescription = "coil_image_view",
-        modifier = Modifier.fillMaxWidth(),
-        contentScale = ContentScale.FillHeight
-    ) {
-        val state = painter.state
-        if (state is AsyncImagePainter.State.Loading || state is AsyncImagePainter.State.Error) {
-            Progress()
-        } else {
-            SubcomposeAsyncImageContent()
-        }
-    }
-}
-
-@Composable
-fun Progress() {
-    Box(modifier = Modifier.size(50.dp, 50.dp), contentAlignment = Alignment.Center) {
-        CircularProgressIndicator()
-    }
-}
-
-@Composable
 fun ImageText(id: Int, flip: Boolean = false) {
     Card(
         modifier = Modifier
