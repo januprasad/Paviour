@@ -16,18 +16,23 @@ import coil.compose.SubcomposeAsyncImageContent
 @Composable
 fun ImageView(id: Any) {
     ImageViewWrapper {
-        SubcomposeAsyncImage(
-            model = id,
-            contentDescription = "coil_image_view",
-            modifier = Modifier.fillMaxWidth(),
-            contentScale = ContentScale.FillHeight
-        ) {
-            val state = painter.state
-            if (state is AsyncImagePainter.State.Loading || state is AsyncImagePainter.State.Error) {
-                Progress()
-            } else {
-                SubcomposeAsyncImageContent()
-            }
+        CoilImageLoader(id)
+    }
+}
+
+@Composable
+fun CoilImageLoader(id: Any) {
+    SubcomposeAsyncImage(
+        model = id,
+        contentDescription = "coil_image_view",
+        modifier = Modifier.fillMaxWidth(),
+        contentScale = ContentScale.FillHeight
+    ) {
+        val state = painter.state
+        if (state is AsyncImagePainter.State.Loading || state is AsyncImagePainter.State.Error) {
+            Progress()
+        } else {
+            SubcomposeAsyncImageContent()
         }
     }
 }
