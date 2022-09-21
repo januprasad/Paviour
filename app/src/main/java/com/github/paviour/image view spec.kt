@@ -23,7 +23,7 @@ fun ImageView(id: Any) {
 @Composable
 fun CoilImageLoader(id: Any) {
     SubcomposeAsyncImage(
-        model = id,
+        model = "https://images.unsplash.com/photo-1541753236788-b0ac1fc5009d?ixlib=rb-1.2.1&dl=jade-stephens-T-FSAK4Bv9c-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
         contentDescription = "coil_image_view",
         modifier = Modifier.fillMaxWidth(),
         contentScale = ContentScale.FillHeight
