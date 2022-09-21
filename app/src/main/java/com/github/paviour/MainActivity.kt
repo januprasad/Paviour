@@ -42,7 +42,7 @@ fun App() {
         item {
             Column(
                 modifier = Modifier
-                    .background(Color.Red)
+                    .background(Color.DarkGray)
                     .fillMaxWidth()
                     .height(720.dp)
             ) {
@@ -59,7 +59,7 @@ fun App() {
         item {
             Column(
                 modifier = Modifier
-                    .background(Color.White)
+                    .background(Color.LightGray)
                     .fillMaxWidth()
                     .height(500.dp)
             ) {
@@ -70,7 +70,7 @@ fun App() {
         item {
             Column(
                 modifier = Modifier
-                    .background(Color.Yellow)
+                    .background(Color.Gray)
                     .fillMaxWidth()
                     .height(720.dp)
             ) {

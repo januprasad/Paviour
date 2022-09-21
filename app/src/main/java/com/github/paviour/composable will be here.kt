@@ -1,9 +1,9 @@
 package com.github.paviour
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -11,10 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImagePainter
+import coil.compose.SubcomposeAsyncImage
+import coil.compose.SubcomposeAsyncImageContent
 import com.github.paviour.ui.theme.PaviourTheme
 
 @Composable
@@ -27,12 +29,7 @@ fun TopSection(id: Int) {
             shape = RoundedCornerShape(12.dp),
             elevation = 2.dp
         ) {
-            Image(
-                painterResource(id),
-                contentDescription = "",
-                contentScale = ContentScale.FillBounds,
-                modifier = Modifier.fillMaxSize()
-            )
+            ImageView(id)
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -133,19 +130,27 @@ fun EndSection() {
 }
 
 @Composable
-fun ImageCard(id: Int, flip: Boolean = false) {
-    Image(
-        painterResource(id),
-        contentDescription = "",
-        contentScale = ContentScale.FillBounds,
-        modifier = if (flip) {
-            Modifier
-                .fillMaxSize()
-                .scale(scaleX = -1f, scaleY = 1f)
+fun ImageView(id: Any) {
+    SubcomposeAsyncImage(
+        model = id,
+        contentDescription = "coil_image_view",
+        modifier = Modifier.fillMaxWidth(),
+        contentScale = ContentScale.FillHeight
+    ) {
+        val state = painter.state
+        if (state is AsyncImagePainter.State.Loading || state is AsyncImagePainter.State.Error) {
+            Progress()
         } else {
-            Modifier.fillMaxSize()
+            SubcomposeAsyncImageContent()
         }
-    )
+    }
+}
+
+@Composable
+fun Progress() {
+    Box(modifier = Modifier.size(50.dp, 50.dp), contentAlignment = Alignment.Center) {
+        CircularProgressIndicator()
+    }
 }
 
 @Composable
@@ -192,12 +197,7 @@ fun CardElement(id: Int, flip: Boolean) {
                 .fillMaxWidth()
                 .weight(1.0f)
         ) {
-            Image(
-                painterResource(id),
-                contentDescription = "",
-                contentScale = ContentScale.FillBounds,
-                modifier = Modifier.fillMaxWidth()
-            )
+            ImageView(id = R.drawable.img)
         }
     }
 }
